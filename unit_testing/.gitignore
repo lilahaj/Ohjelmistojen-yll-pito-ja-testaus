@@ -1,0 +1,30 @@
+# Ignore node modules for this subproject
+node_modules/
+
+# Lockfiles
+package-lock.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage and build artifacts
+coverage/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# Editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log
