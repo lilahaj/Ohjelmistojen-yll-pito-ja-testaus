@@ -1,0 +1,16 @@
+{
+  "name": "mylib-project",
+  "version": "1.0.0",
+  "description": "Simple mylib with arithmetic ops and tests",
+  "main": "Unit_Test/main.js",
+  "scripts": {
+    "test": "mocha \"Unit_Test/*.js\"",
+    "start": "node Unit_Test/main.js"
+  },
+  "devDependencies": {
+    "chai": "^6.2.2",
+    "mocha": "^11.7.5"
+  },
+  "author": "",
+  "license": "ISC"
+}
