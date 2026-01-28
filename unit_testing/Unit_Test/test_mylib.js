@@ -3,11 +3,11 @@ const mylib = require("./mylib");
 
 describe("mylib arithmetic operations", function () {
   before(function () {
-    console.log("Setting up test suite");
+    console.log("Starting test:");
   });
 
   after(function () {
-    console.log("Tearing down test suite");
+    console.log("Test done!");
   });
 
   describe("add", function () {
