@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HEX to RGB Muunnin</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        background-image: url(../img/blahaj-pehmolelu-pikkuhai__0716615_pe730956_s5.avif);
+      }
+      input {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px 0;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #tulos {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pikkuhain HEX to RGB Muunnin</h1>
+    <p>Syötä HEX-värikoodi:</p>
+    <input type="text" id="hexInput" placeholder="esim. FF0000" maxlength="6" />
+    <button onclick="muunna()">Muunna</button>
+    <div id="tulos"></div>
+
+    <hr />
+
+    <h2>Toisen pikkuhain RGB to HEX Muunnin</h2>
+    <p>Syötä RGB-arvot (0-255):</p>
+    <input
+      type="number"
+      id="rInput"
+      placeholder="R"
+      min="0"
+      max="255"
+      style="width: 60px"
+    />
+    <input
+      type="number"
+      id="gInput"
+      placeholder="G"
+      min="0"
+      max="255"
+      style="width: 60px"
+    />
+    <input
+      type="number"
+      id="bInput"
+      placeholder="B"
+      min="0"
+      max="255"
+      style="width: 60px"
+    />
+    <button onclick="muunnaRgb()">Muunna</button>
+    <div id="tulosRgb"></div>
+
+    <script>
+      async function muunna() {
+        const hex = document.getElementById("hexInput").value;
+        const tulosDiv = document.getElementById("tulos");
+        tulosDiv.innerText = "";
+        tulosDiv.className = "";
+
+        if (!hex) {
+          tulosDiv.innerText = "Syötä värikoodi!";
+          tulosDiv.className = "error";
+          return;
+        }
+
+        try {
+          const response = await fetch(`/hex-to-rgb?hex=${hex}`);
+          const data = await response.json();
+
+          if (response.ok) {
+            tulosDiv.innerText = `R: ${data.r}, G: ${data.g}, B: ${data.b}`;
+            tulosDiv.style.color = `rgb(${data.r}, ${data.g}, ${data.b})`;
+          } else {
+            tulosDiv.innerText = data.error || "Virhe muunnoksessa";
+            tulosDiv.className = "error";
+          }
+        } catch (error) {
+          tulosDiv.innerText = "Yhteysvirhe palvelimeen";
+          tulosDiv.className = "error";
+        }
+      }
+
+      async function muunnaRgb() {
+        const r = document.getElementById("rInput").value;
+        const g = document.getElementById("gInput").value;
+        const b = document.getElementById("bInput").value;
+        const tulosDiv = document.getElementById("tulosRgb");
+        tulosDiv.innerText = "";
+        tulosDiv.className = "";
+
+        if (r === "" || g === "" || b === "") {
+          tulosDiv.innerText = "Syötä kaikki arvot!";
+          tulosDiv.className = "error";
+          return;
+        }
+
+        try {
+          const response = await fetch(`/rgb-to-hex?r=${r}&g=${g}&b=${b}`);
+          const data = await response.json();
+
+          if (response.ok) {
+            tulosDiv.innerText = `HEX: #${data.hex}`;
+            tulosDiv.style.color = `#${data.hex}`;
+          } else {
+            tulosDiv.innerText = data.error || "Virhe muunnoksessa";
+            tulosDiv.className = "error";
+          }
+        } catch (error) {
+          tulosDiv.innerText = "Yhteysvirhe palvelimeen";
+          tulosDiv.className = "error";
+        }
+      }
+    </script>
+  </body>
+</html>

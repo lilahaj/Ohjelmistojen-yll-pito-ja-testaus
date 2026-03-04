@@ -10,4 +10,20 @@ function hexToRgb(hex) {
   return { r, g, b };
 }
 
-module.exports = { hexToRgb };
+function rgbToHex(r, g, b) {
+  r = parseInt(r);
+  g = parseInt(g);
+  b = parseInt(b);
+
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return null;
+  if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) return null;
+
+  const toHex = (n) => {
+    const hex = n.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  };
+
+  return (toHex(r) + toHex(g) + toHex(b)).toUpperCase();
+}
+
+module.exports = { hexToRgb, rgbToHex };
