@@ -1,0 +1,20 @@
+{
+  "name": "task1-logging-winston",
+  "version": "1.0.0",
+  "description": "Task 1: Implement logging library (Winston) in a Node.js app.",
+  "main": "src/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "winston": "3.11.0"
+  },
+  "devDependencies": {
+    "mocha": "10.4.0"
+  }
+}
