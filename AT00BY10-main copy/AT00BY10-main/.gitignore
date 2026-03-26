@@ -1,0 +1,13 @@
+# Ignore node modules
+node_modules/
+**/node_modules/
+
+# Environment related information
+.env
+
+# OS generated files
+.DS_Store
+
+# Testing and coverage
+coverage/
+tmp/
