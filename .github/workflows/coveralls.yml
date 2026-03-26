@@ -1,0 +1,36 @@
+name: Test and Coveralls
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        # NOTE: change this to just '.' or the correct folder name depending on how your repo is structured in GitHub.
+        working-directory: 'AT00BY10-main copy/AT00BY10-main'
+
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Run tests & generate coverage
+      run: npm run coverage
+      
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        base-path: 'AT00BY10-main copy/AT00BY10-main'
